@@ -18,22 +18,23 @@ const renderCategoryItem = ({ item }: any) => {
 
 export default () => {
   return (
-    <LinearGradient colors={["#f352a8", "#169dca"]} style={{ flex: 1 }}>
+    <LinearGradient colors={["#003546", "#480328"]} style={{ flex: 1 }}>
       <ImageBackground
-        source={require("./../assets/images/background3.jpg")}
+        source={require("./../assets/images/background5.jpg")}
         resizeMode="cover"
         imageStyle={{ opacity: 0.6 }}
         style={{ flex: 1 }}
       >
-        <SafeAreaView style={{paddingTop: 30}}>
+        {/* <SafeAreaView style={{paddingTop: 30}}> */}
           <FlatList
             data={CATEGORIES}
             keyExtractor={(item) => item.id}
             renderItem={renderCategoryItem}
             numColumns={2}
             style={styles.listContainer}
+            contentContainerStyle={{paddingVertical: 20}}
           />
-        </SafeAreaView>
+        {/* </SafeAreaView> */}
       </ImageBackground>
     </LinearGradient>
   );
@@ -41,7 +42,7 @@ export default () => {
 
 const styles = StyleSheet.create({
   listContainer: {
-    height: "100%",
-    paddingHorizontal: 10
+    flex: 1,
+    paddingHorizontal: 10,
   },
 });
