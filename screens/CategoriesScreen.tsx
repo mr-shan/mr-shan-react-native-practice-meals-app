@@ -1,4 +1,5 @@
 import { FlatList, StyleSheet, ImageBackground } from "react-native";
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 import { CATEGORIES } from "../data/dummy-data";
 
@@ -7,9 +8,14 @@ import { LinearGradient } from "expo-linear-gradient";
 import CategoryTile from "../components/CategoryTile";
 import Category from "../models/category";
 
-export default ({ navigation }) => {
+interface IPageProps {
+  navigation: NativeStackNavigationProp<any, any>;
+}
+
+
+export default (props: IPageProps ) => {
   const navigationHandler = (item: Category) => {
-    navigation.navigate('Category Overview', item);
+    props.navigation.navigate('Category Overview', item);
   };
 
   const renderCategoryItem = ({ item }: any) => {

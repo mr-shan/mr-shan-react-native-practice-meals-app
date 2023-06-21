@@ -1,19 +1,28 @@
-import { View, Pressable, StyleSheet, Text, Platform, GestureResponderEvent } from "react-native";
+import {
+  View,
+  Pressable,
+  StyleSheet,
+  Text,
+  Platform,
+  GestureResponderEvent,
+  PressableProps,
+  PressableStateCallbackType,
+} from "react-native";
 
 import { shadow } from "../helper/style";
 
 interface IProps {
   title: string;
   color: string;
-  onPress: any
+  onPress: any;
 }
 
 export default (props: IProps) => {
-  const pressableStyles = ({ pressed }) => {
-    const styleList = [styles.pressable, { backgroundColor: props.color }]
-    if (pressed && Platform.OS === 'ios') styleList.push(styles.pressed)
+  const pressableStyles = ({ pressed }: PressableStateCallbackType) => {
+    const styleList = [styles.pressable, { backgroundColor: props.color }];
+    if (pressed && Platform.OS === "ios") styleList.push(styles.pressed);
     return styleList;
-  }
+  };
 
   return (
     <View style={styles.container}>
@@ -34,7 +43,7 @@ const styles = StyleSheet.create({
     margin: 10,
     minHeight: 140,
     borderRadius: 20,
-    overflow: Platform.OS === 'android' ? 'hidden' : 'visible',
+    overflow: Platform.OS === "android" ? "hidden" : "visible",
     ...shadow,
   },
   pressable: {
@@ -42,20 +51,20 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    opacity: 0.9
+    opacity: 0.9,
   },
   pressed: {
     opacity: 0.8,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: { height: 0, width: 0 },
     shadowOpacity: 0.2,
-    shadowRadius: 5
+    shadowRadius: 5,
   },
   title: {
     color: "#111",
     fontSize: 18,
     fontWeight: "bold",
     textShadowColor: "#f891b7",
-    textShadowRadius: 1
+    textShadowRadius: 1,
   },
 });

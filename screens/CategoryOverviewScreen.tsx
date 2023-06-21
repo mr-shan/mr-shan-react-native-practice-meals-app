@@ -1,14 +1,17 @@
 import { View, Text, StyleSheet } from "react-native";
+import { RouteProp } from '@react-navigation/native';
 
 import { MEALS } from "../data/dummy-data";
 import Meal from "../models/meal";
 
-interface IProps {}
+interface IProps {
+  route: RouteProp<any>
+}
 
-export default ({ route }) => {
-  const categoryDetails = route.params;
+export default (props: IProps) => {
+  const categoryDetails = props.route.params;
   const mealsForCategory = MEALS.filter((mealItem: Meal) =>
-    mealItem.categoryIds.includes(categoryDetails.id)
+    mealItem.categoryIds.includes(categoryDetails?.id)
   );
 
   return (
