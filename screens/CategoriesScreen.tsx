@@ -1,22 +1,31 @@
-import {
-  FlatList,
-  Platform,
-  StyleSheet,
-  ImageBackground,
-  SafeAreaView,
-} from "react-native";
+import { FlatList, StyleSheet, ImageBackground } from "react-native";
 
 import { CATEGORIES } from "../data/dummy-data";
 
 import { LinearGradient } from "expo-linear-gradient";
 
 import CategoryTile from "../components/CategoryTile";
+import Category from "../models/category";
 
-const renderCategoryItem = ({ item }: any) => {
-  return <CategoryTile title={item.title} color={item.color} />;
-};
+export default ({ navigation }) => {
+  const navigationHandler = (item: Category) => {
+    navigation.navigate('Category Overview', item);
+  };
 
-export default () => {
+  const renderCategoryItem = ({ item }: any) => {
+    const onPressHandler = () => {
+      navigationHandler(item);
+    };
+
+    return (
+      <CategoryTile
+        title={item.title}
+        color={item.color}
+        onPress={onPressHandler}
+      />
+    );
+  };
+
   return (
     <LinearGradient colors={["#003546", "#480328"]} style={{ flex: 1 }}>
       <ImageBackground
@@ -25,16 +34,14 @@ export default () => {
         imageStyle={{ opacity: 0.6 }}
         style={{ flex: 1 }}
       >
-        {/* <SafeAreaView style={{paddingTop: 30}}> */}
-          <FlatList
-            data={CATEGORIES}
-            keyExtractor={(item) => item.id}
-            renderItem={renderCategoryItem}
-            numColumns={2}
-            style={styles.listContainer}
-            contentContainerStyle={{paddingVertical: 20}}
-          />
-        {/* </SafeAreaView> */}
+        <FlatList
+          data={CATEGORIES}
+          keyExtractor={(item) => item.id}
+          renderItem={renderCategoryItem}
+          numColumns={2}
+          style={styles.listContainer}
+          contentContainerStyle={{ paddingVertical: 20 }}
+        />
       </ImageBackground>
     </LinearGradient>
   );
