@@ -7,13 +7,16 @@ import {
   Platform,
 } from "react-native";
 
+import VegNonVeg from "./mealDetails/VegNonVeg";
+import TimeDuration from "./mealDetails/TimeDuration";
+
 import { shadow } from "../helper/style";
 
 interface IProps {
   title: string;
   imageUrl: string;
-  duration: string;
-  isVegetarian: string;
+  duration: number;
+  isVegetarian: boolean;
   onPress: any;
 }
 
@@ -22,24 +25,21 @@ export default (props: IProps) => {
     <View style={styles.container}>
       <Pressable
         onPress={props.onPress}
-        style={({ pressed }) => pressed ? styles.pressed : null }
+        style={({ pressed }) => (pressed ? styles.pressed : null)}
         android_ripple={{ color: "#ccc" }}
       >
         <Image source={{ uri: props.imageUrl }} style={styles.image} />
         <Text style={styles.title}>{props.title}</Text>
         <View style={styles.footer}>
-          <Text style={styles.footerText}>
-            {props.duration}
-            <Text style={{ color: "#999", fontSize: 12 }}> min</Text>
-          </Text>
-          <Text style={styles.footerText}>{props.isVegetarian.toString()}</Text>
+          <VegNonVeg isVeg={props.isVegetarian} />
+          <TimeDuration duration={props.duration} />
         </View>
       </Pressable>
     </View>
   );
 };
 
-const borderRadius = 10
+const borderRadius = 10;
 
 const styles = StyleSheet.create({
   container: {
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     overflow: Platform.OS === "android" ? "hidden" : "visible",
   },
   pressed: {
-    opacity: 0.8
+    opacity: 0.8,
   },
   image: {
     height: 200,
@@ -72,6 +72,5 @@ const styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "row",
     paddingHorizontal: 20,
-  },
-  footerText: {},
+  }
 });

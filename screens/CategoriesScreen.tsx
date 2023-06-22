@@ -60,6 +60,5 @@ const styles = StyleSheet.create({
   },
   flatListContainer: {
     paddingVertical: 20,
-    // paddingTop: Platform.OS === 'ios' ? 110 : 20
   }
 });

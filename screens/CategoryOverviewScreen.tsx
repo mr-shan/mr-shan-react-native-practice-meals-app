@@ -22,12 +22,14 @@ export default (props: IProps) => {
   useEffect(() => {
     props.navigation.setOptions({
       title: categoryDetails?.title,
+      headerTintColor: "black",
+      headerStyle: { backgroundColor: categoryDetails?.color },
     });
   }, []);
 
   const renderComponent = ({ item }: any) => {
     const onPressHandler = () => {
-      console.log("Meal on press");
+      props.navigation.navigate("MealDetails", item);
     };
 
     return (
@@ -60,6 +62,5 @@ const styles = StyleSheet.create({
   listContainer: {
     paddingVertical: 20,
     paddingHorizontal: 14,
-    // paddingTop: Platform.OS === "ios" ? 110 : 20,
   },
 });
