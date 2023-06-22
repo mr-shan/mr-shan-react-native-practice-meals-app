@@ -4,8 +4,6 @@ import {
   StyleSheet,
   Text,
   Platform,
-  GestureResponderEvent,
-  PressableProps,
   PressableStateCallbackType,
 } from "react-native";
 
@@ -44,14 +42,12 @@ const styles = StyleSheet.create({
     minHeight: 140,
     borderRadius: 20,
     overflow: Platform.OS === "android" ? "hidden" : "visible",
-    ...shadow,
   },
   pressable: {
     borderRadius: 20,
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    opacity: 0.9,
   },
   pressed: {
     opacity: 0.8,

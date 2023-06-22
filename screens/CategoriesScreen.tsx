@@ -1,4 +1,4 @@
-import { FlatList, StyleSheet, ImageBackground } from "react-native";
+import { FlatList, StyleSheet, ImageBackground, Platform } from "react-native";
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 import { CATEGORIES } from "../data/dummy-data";
@@ -15,7 +15,7 @@ interface IPageProps {
 
 export default (props: IPageProps ) => {
   const navigationHandler = (item: Category) => {
-    props.navigation.navigate('Category Overview', item);
+    props.navigation.navigate('CategoryOverview', item);
   };
 
   const renderCategoryItem = ({ item }: any) => {
@@ -46,7 +46,7 @@ export default (props: IPageProps ) => {
           renderItem={renderCategoryItem}
           numColumns={2}
           style={styles.listContainer}
-          contentContainerStyle={{ paddingVertical: 20 }}
+          contentContainerStyle={styles.flatListContainer}
         />
       </ImageBackground>
     </LinearGradient>
@@ -58,4 +58,8 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 10,
   },
+  flatListContainer: {
+    paddingVertical: 20,
+    // paddingTop: Platform.OS === 'ios' ? 110 : 20
+  }
 });
