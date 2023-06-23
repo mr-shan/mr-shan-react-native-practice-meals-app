@@ -24,7 +24,7 @@ export default (props: IProps) => {
 const styles = StyleSheet.create({
   ingredientsList: {
     padding: 2,
-    rowGap: 8,
+    rowGap: 5,
     width: "100%",
   },
   stepContainer: {
@@ -32,13 +32,15 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   indicator: {
-    fontSize: 14,
+    fontSize: 16,
+    lineHeight: 22,
     color: "#7b355f",
     textAlign: "left",
     width: 18,
   },
   label: {
-    fontSize: 14,
+    fontSize: 16,
+    lineHeight: 22,
     color: "#666",
     flexWrap: "wrap",
     flexDirection: "row",

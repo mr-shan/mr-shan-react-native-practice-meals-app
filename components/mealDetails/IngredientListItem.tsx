@@ -50,7 +50,8 @@ const styles = StyleSheet.create({
     color: "#7b355f",
   },
   label: {
-    fontSize: 14,
+    fontSize: 16,
+    lineHeight: 20,
     color: "#666",
     flexWrap: "wrap",
     flexDirection: "row",

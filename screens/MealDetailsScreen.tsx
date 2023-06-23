@@ -42,7 +42,7 @@ export default (props: IProps) => {
 
       <IngredientList ingredients={mealDetails.ingredients} />
       <PreparationSteps steps={mealDetails.steps} />
-      <View style={{marginBottom: 32}}></View>
+      <View style={{ marginBottom: 24 }}></View>
     </ScrollView>
   );
 };
@@ -62,5 +62,5 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#ccc",
     backgroundColor: "white",
-  }
+  },
 });
