@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     lineHeight: 22,
     color: "#7b355f",
     textAlign: "left",
-    width: 18,
+    width: 22,
   },
   label: {
     fontSize: 16,
