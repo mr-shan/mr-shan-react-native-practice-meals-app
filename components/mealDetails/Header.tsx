@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     ...shadow,
     backgroundColor: "white",
     borderRadius: 10,
-    marginTop: 20
+    marginTop: 10
   },
   image: {
     height: 300,

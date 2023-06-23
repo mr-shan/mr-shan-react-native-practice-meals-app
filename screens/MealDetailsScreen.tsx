@@ -1,14 +1,14 @@
-import { useEffect } from "react";
-import { Text, StyleSheet, View, Image, ScrollView } from "react-native";
+import { useEffect, useLayoutEffect, useState } from "react";
+import { StyleSheet, View, ScrollView } from "react-native";
 
 import { RouteProp } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 import Checkbox from "../components/mealDetails/Checkbox";
-import IngredientListItem from "../components/mealDetails/IngredientListItem";
 import Header from "../components/mealDetails/Header";
 import IngredientList from "../components/mealDetails/IngredientList";
 import PreparationSteps from "../components/mealDetails/PreparationSteps";
+import FavouriteButton from "../components/mealDetails/FavouriteButton";
 
 import Meal from "../models/meal";
 
@@ -19,6 +19,25 @@ interface IProps {
 
 export default (props: IProps) => {
   const mealDetails = props.route.params as Meal;
+  const [isFavourite, setIsFavourite] = useState(mealDetails.isFavourite);
+
+  const favouritePressHandler = () => {
+    mealDetails.isFavourite = !mealDetails.isFavourite;
+    setIsFavourite(mealDetails.isFavourite);
+  };
+
+  useLayoutEffect(() => {
+    props.navigation.setOptions({
+      headerRight: () => {
+        return (
+          <FavouriteButton
+            isFavourite={isFavourite}
+            onPress={favouritePressHandler}
+          />
+        );
+      },
+    });
+  }, [isFavourite]);
 
   useEffect(() => {
     props.navigation.setOptions({ title: mealDetails.title });
@@ -49,7 +68,7 @@ export default (props: IProps) => {
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 14,
+    paddingHorizontal: 10,
   },
   moreDetails: {
     marginTop: 10,

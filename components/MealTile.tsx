@@ -31,8 +31,8 @@ export default (props: IProps) => {
         <Image source={{ uri: props.imageUrl }} style={styles.image} />
         <Text style={styles.title}>{props.title}</Text>
         <View style={styles.footer}>
-          <VegNonVeg isVeg={props.isVegetarian} />
           <TimeDuration duration={props.duration} />
+          <VegNonVeg isVeg={props.isVegetarian} />
         </View>
       </Pressable>
     </View>
