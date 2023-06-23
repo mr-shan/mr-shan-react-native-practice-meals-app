@@ -9,7 +9,7 @@ interface IProps {
 
 export default (props: IProps) => {
   let icon = null;
-  const iconSize = 24;
+  const iconSize = 22;
 
   if (props.checked) {
     icon = (
@@ -31,11 +31,10 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     alignItems: "center",
-    padding: 1
+    padding: 1,
   },
   title: {
     color: "#333",
     marginLeft: 5,
   },
-  icon: {},
 });

@@ -1,14 +1,14 @@
 import { useEffect } from "react";
-import { Text, StyleSheet, View, Image } from "react-native";
+import { Text, StyleSheet, View, Image, ScrollView } from "react-native";
 
 import { RouteProp } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
-import { shadow } from "../helper/style";
-
-import TimeDuration from "../components/mealDetails/TimeDuration";
-import VegNonVeg from "../components/mealDetails/VegNonVeg";
 import Checkbox from "../components/mealDetails/Checkbox";
+import IngredientListItem from "../components/mealDetails/IngredientListItem";
+import Header from "../components/mealDetails/Header";
+import IngredientList from "../components/mealDetails/IngredientList";
+import PreparationSteps from "../components/mealDetails/PreparationSteps";
 
 import Meal from "../models/meal";
 
@@ -25,17 +25,14 @@ export default (props: IProps) => {
   }, []);
 
   return (
-    <View style={styles.container}>
-      <Image source={{ uri: mealDetails.imageUrl }} style={styles.image} />
-
-      <View style={styles.details}>
-        <VegNonVeg isVeg={mealDetails.isVegetarian} />
-        <View style={styles.difficultyTextWrapper}>
-          <Text>{mealDetails.affordability.toUpperCase()}, </Text>
-          <Text>{mealDetails.complexity.toUpperCase()}</Text>
-        </View>
-        <TimeDuration duration={mealDetails.duration} />
-      </View>
+    <ScrollView style={styles.container}>
+      <Header
+        affordability={mealDetails.affordability}
+        complexity={mealDetails.complexity}
+        duration={mealDetails.duration}
+        imageUri={mealDetails.imageUrl}
+        isVegetarian={mealDetails.isVegetarian}
+      />
 
       <View style={styles.moreDetails}>
         <Checkbox checked={mealDetails.isGlutenFree} title="Gluten Free" />
@@ -43,40 +40,16 @@ export default (props: IProps) => {
         <Checkbox checked={mealDetails.isLactoseFree} title="Lactose Free" />
       </View>
 
-      <View style={styles.ingredientsContainer}>
-        <Text style={styles.title}>Ingredients</Text>
-      </View>
-
-      <View style={styles.stepsContainer}>
-        <Text style={styles.title}>Steps</Text>
-      </View>
-    </View>
+      <IngredientList ingredients={mealDetails.ingredients} />
+      <PreparationSteps steps={mealDetails.steps} />
+      <View style={{marginBottom: 32}}></View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    padding: 4,
-    borderRadius: 10,
-    overflow: "hidden",
-  },
-  image: {
-    height: 300,
-  },
-  difficultyTextWrapper: {
-    flexDirection: "row",
-    alignItems: "center",
-    color: "#999",
-  },
-  details: {
-    ...shadow,
-    flexDirection: "row",
-    backgroundColor: "white",
-    justifyContent: "space-between",
-    padding: 10,
-    borderBottomEndRadius: 10,
-    borderBottomStartRadius: 10,
+    paddingHorizontal: 14,
   },
   moreDetails: {
     marginTop: 10,
@@ -89,32 +62,5 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: "#ccc",
     backgroundColor: "white",
-  },
-  ingredientsContainer: {
-    padding: 10,
-    width: '100%',
-    backgroundColor: 'white',
-    textAlign: 'center',
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: '#ccc',
-    alignItems: 'center',
-    marginTop: 10,
-  },
-  stepsContainer: {
-    padding: 10,
-    width: '100%',
-    backgroundColor: 'white',
-    textAlign: 'center',
-    alignItems: 'center',
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: '#ccc',
-    marginTop: 10,
-  },
-  title: {
-    fontSize: 16,
-    fontWeight: "500",
-    color: '#8b3768'
   }
 });
