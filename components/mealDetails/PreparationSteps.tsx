@@ -34,9 +34,10 @@ const styles = StyleSheet.create({
   indicator: {
     fontSize: 16,
     lineHeight: 22,
-    color: "#7b355f",
+    color: "#348578",
     textAlign: "left",
     width: 22,
+    fontWeight: 500
   },
   label: {
     fontSize: 16,

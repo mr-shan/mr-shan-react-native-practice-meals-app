@@ -28,10 +28,11 @@ const TabScreens = () => {
   return (
     <Tab.Navigator
       screenOptions={{ 
-        ...screenOptions, 
+        ...screenOptions,
+        headerTitleStyle: { fontSize: 20 },
         tabBarActiveTintColor: "#ee80c0",
         tabBarLabelStyle: { fontSize: 12, fontWeight: '500' },
-        tabBarStyle: { backgroundColor: '#111' },
+        tabBarStyle: { backgroundColor: '#111', borderWidth: 0 },
         tabBarItemStyle: { borderRadius: 20 }
       }}
     >

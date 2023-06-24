@@ -8,27 +8,12 @@ interface IProps {
 }
 
 export default (props: IProps) => {
-  let indicator = null;
-
-  if (props.indicator === "icon") {
-    indicator = (
-      <IonIcons
-        name="send-outline"
-        size={14}
-        color={"#7b355f"}
-        style={styles.icon}
-      />
-    );
-  } else {
-    indicator = <Text style={styles.indicator}>{indicator}</Text>;
-  }
-
   return (
     <View style={styles.container}>
       <IonIcons
-        name="send-outline"
+        name="caret-forward"
         size={14}
-        color={"#7b355f"}
+        color={"#348578"}
         style={styles.icon}
       />
       <Text style={styles.label}>{props.label}</Text>
@@ -41,13 +26,12 @@ const styles = StyleSheet.create({
     padding: 2,
     flexDirection: "row",
     width: "50%",
+    alignItems: 'stretch',
+    
   },
   icon: {
     marginRight: 5,
-  },
-  indicator: {
-    fontSize: 16,
-    color: "#7b355f",
+    paddingTop: 3
   },
   label: {
     fontSize: 16,
