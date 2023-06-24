@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useContext } from "react";
 import { StyleSheet, View, ScrollView } from "react-native";
 
 import { RouteProp } from "@react-navigation/native";
@@ -10,6 +10,7 @@ import IngredientList from "../components/mealDetails/IngredientList";
 import PreparationSteps from "../components/mealDetails/PreparationSteps";
 import FavouriteButton from "../components/mealDetails/FavouriteButton";
 
+import { FavoriteContext } from "../store/favorite-context";
 import Meal from "../models/meal";
 
 interface IProps {
@@ -18,12 +19,17 @@ interface IProps {
 }
 
 export default (props: IProps) => {
+  const favoriteContext = useContext(FavoriteContext);
   const mealDetails = props.route.params as Meal;
-  const [isFavourite, setIsFavourite] = useState(mealDetails.isFavourite);
+
+  const isFavourite = favoriteContext.ids.includes(mealDetails.id);
 
   const favouritePressHandler = () => {
-    mealDetails.isFavourite = !mealDetails.isFavourite;
-    setIsFavourite(mealDetails.isFavourite);
+    if (isFavourite) {
+      favoriteContext.removeFavorite(mealDetails.id);
+    } else {
+      favoriteContext.addFavorite(mealDetails.id);
+    }
   };
 
   useLayoutEffect(() => {
@@ -37,7 +43,7 @@ export default (props: IProps) => {
         );
       },
     });
-  }, [isFavourite]);
+  }, [favouritePressHandler]);
 
   useEffect(() => {
     props.navigation.setOptions({ title: mealDetails.title });

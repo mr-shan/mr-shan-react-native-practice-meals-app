@@ -12,6 +12,8 @@ import CategoryOverviewScreen from "./screens/CategoryOverviewScreen";
 import MealDetailsScreen from "./screens/MealDetailsScreen";
 import FavoriteMealScreen from "./screens/FavoriteMealScreen";
 
+import FavoriteContextProvider from "./store/favorite-context";
+
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -20,20 +22,26 @@ const screenOptions = {
   headerTintColor: "white",
 };
 
-const TabBarIcon = props => {
-  return <Ionicons name={props.type} color={props.color} size={props.size}/>
+interface ITabBarIconProps {
+  type: any;
+  color: string;
+  size: number;
 }
+
+const TabBarIcon = (props: ITabBarIconProps) => {
+  return <Ionicons name={props.type} color={props.color} size={props.size} />;
+};
 
 const TabScreens = () => {
   return (
     <Tab.Navigator
-      screenOptions={{ 
+      screenOptions={{
         ...screenOptions,
         headerTitleStyle: { fontSize: 20 },
         tabBarActiveTintColor: "#ee80c0",
-        tabBarLabelStyle: { fontSize: 12, fontWeight: '500' },
-        tabBarStyle: { backgroundColor: '#111', borderWidth: 0 },
-        tabBarItemStyle: { borderRadius: 20 }
+        tabBarLabelStyle: { fontSize: 12, fontWeight: "500" },
+        tabBarStyle: { backgroundColor: "#111", borderWidth: 0 },
+        tabBarItemStyle: { borderRadius: 20 },
       }}
     >
       <Tab.Screen
@@ -41,7 +49,7 @@ const TabScreens = () => {
         component={CategoriesScreen}
         options={{
           title: "Categories",
-          tabBarIcon: ((props) => <TabBarIcon {...props} type="grid" />)
+          tabBarIcon: (props) => <TabBarIcon {...props} type="grid" />,
         }}
       />
       <Tab.Screen
@@ -49,7 +57,7 @@ const TabScreens = () => {
         component={FavoriteMealScreen}
         options={{
           title: "Favorites",
-          tabBarIcon: ((props) => <TabBarIcon {...props} type="heart" />)
+          tabBarIcon: (props) => <TabBarIcon {...props} type="heart" />,
         }}
       />
     </Tab.Navigator>
@@ -58,36 +66,38 @@ const TabScreens = () => {
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <NavigationContainer>
-        <Stack.Navigator screenOptions={screenOptions}>
-          <Stack.Screen
-            name="MealsHome"
-            component={TabScreens}
-            options={{
-              headerShown: false,
-              headerBackTitleVisible: false
-            }}
-          />
-          <Stack.Screen
-            name="CategoryOverview"
-            component={CategoryOverviewScreen}
-            options={{
-              title: "Category Overview",
-              headerBackTitleVisible: false,
-            }}
-          />
-          <Stack.Screen
-            name="MealDetails"
-            component={MealDetailsScreen}
-            options={{
-              headerBackTitleVisible: false,
-            }}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
-      <StatusBar style="auto" />
-    </View>
+    <FavoriteContextProvider>
+      <View style={styles.container}>
+        <NavigationContainer>
+          <Stack.Navigator screenOptions={screenOptions}>
+            <Stack.Screen
+              name="MealsHome"
+              component={TabScreens}
+              options={{
+                headerShown: false,
+                headerBackTitleVisible: false,
+              }}
+            />
+            <Stack.Screen
+              name="CategoryOverview"
+              component={CategoryOverviewScreen}
+              options={{
+                title: "Category Overview",
+                headerBackTitleVisible: false,
+              }}
+            />
+            <Stack.Screen
+              name="MealDetails"
+              component={MealDetailsScreen}
+              options={{
+                headerBackTitleVisible: false,
+              }}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+        <StatusBar style="auto" />
+      </View>
+    </FavoriteContextProvider>
   );
 }
 
